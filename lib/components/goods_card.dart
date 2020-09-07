@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/Goods.dart';
+import 'package:flutter_shop/screen/goods_page.dart';
 
 class GoodsCard extends StatelessWidget {
-  const GoodsCard({
-    Key key,
-    @required this.goods,
-  }) : super(key: key);
+  const GoodsCard({ Key key, @required this.goods, }) : super(key: key);
 
   final Goods goods;
 
@@ -27,7 +25,9 @@ class GoodsCard extends StatelessWidget {
           image: NetworkImage(goods.img),
         ),
         trailing: Icon(Icons.arrow_forward_ios),
-        onTap: () => print("${goods.model} - tap"),
+        onTap: () => {
+        Navigator.push( context, MaterialPageRoute(builder: (context) => GoodsPage(goods: goods)) )
+        },
       ),
     );
   }
