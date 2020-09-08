@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 
-
 class goods_page extends StatelessWidget {
-  const goods_page({
-    Key key,
-    @required this.goods,
-  }) : super(key: key);
+  const goods_page({ Key key,@required this.goods, }) : super(key: key);
 
   final Goods goods;
 
@@ -15,7 +11,7 @@ class goods_page extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // title: Text(goods.model),
+        title: Text(goods.model),
         centerTitle: true,
       ),
       body: ListView(
@@ -33,9 +29,28 @@ class goods_page extends StatelessWidget {
             SizedBox(height: 20,),
             Text("Цена: ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
             Text( goods.price, style: TextStyle(fontSize: 30),),
-            SizedBox(height: 20,)
+            SizedBox(height: 20,),
+            InkWell(
+              onTap: () => addToCard(),
+              child: Container(
+                height: 60,
+                color: Colors.lightBlue,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add_shopping_cart, size: 50, color: Colors.white,),
+                    SizedBox(width: 10,),
+                    Text("Купить",style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),)
+                  ],
+                ),
+              ),
+            )
           ]
       ),
     );
   }
+}
+
+addToCard() {
+  print("add to basket");
 }

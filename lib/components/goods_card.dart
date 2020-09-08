@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 import 'package:flutter_shop/screen/goods_page.dart';
+import 'package:flutter_shop/services/add_to_basket.dart';
 
 class GoodsCard extends StatelessWidget {
   const GoodsCard({
@@ -30,10 +31,9 @@ class GoodsCard extends StatelessWidget {
           width: 50,
           image: NetworkImage(goods.img),
         ),
-        trailing: Icon(Icons.arrow_forward_ios),
+        trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => addToCard(),),
         onTap: () => {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => goods_page(goods: goods)))
+          Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: goods)))
         },
       ),
     );

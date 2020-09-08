@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/components/goods_card.dart';
 import 'package:flutter_shop/model/goods.dart';
-import 'dart:convert';
 
-import 'goods_page.dart';
 
 class GoodsScreen extends StatefulWidget {
   @override
