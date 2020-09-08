@@ -15,11 +15,12 @@ class GoodsCard extends StatelessWidget {
     return Card(
       elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      // child: Text(goods.price),
       child: ListTile(
         title: Wrap(
             children: [
               Text(goods.type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
-              Text(goods.brand + " " + goods.model),
+              Text(goods.brand.toString() + " " + goods.model),
             ],
         ),
         subtitle: Text("Цена: " + goods.price + " ",
@@ -32,7 +33,7 @@ class GoodsCard extends StatelessWidget {
         trailing: Icon(Icons.arrow_forward_ios),
         onTap: () => {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => GoodsPage(goods: goods)))
+              MaterialPageRoute(builder: (context) => goods_page(goods: goods)))
         },
       ),
     );
