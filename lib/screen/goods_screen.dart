@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/components/goods_card.dart';
-import 'package:flutter_shop/model/Goods.dart';
+import 'package:flutter_shop/model/goods.dart';
 
 class GoodsScreen extends StatelessWidget {
   final goods = <Goods>[
@@ -66,7 +66,7 @@ Solo3 Wireless, BeatsX, Beats Studio3 Wireless и Powerbeats3 Wireless. Треб
 """),
     Goods(
         brand: "Apple",
-        model: "Watch Series 3, 38 мм",
+        model: "Watch Series 3, 38 мм TEEEeeeeeeEEEST LOOOOONG TEEEEEXT",
         type: "Часы",
         img:
         "https://static.re-store.ru/upload/resize_cache/iblock/53e/1000_786_17f5c944b3b71591cc9304fac25365de2/53ee8705999d2c251eb509ec6fb7ea45.jpg",

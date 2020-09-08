@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/model/Goods.dart';
+import 'package:flutter_shop/model/goods.dart';
 import 'package:flutter_shop/screen/goods_page.dart';
 
 class GoodsCard extends StatelessWidget {
-  const GoodsCard({ Key key, @required this.goods, }) : super(key: key);
+  const GoodsCard({
+    Key key,
+    @required this.goods,
+  }) : super(key: key);
 
   final Goods goods;
 
@@ -13,12 +16,14 @@ class GoodsCard extends StatelessWidget {
       elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: ListTile(
-        title: Row(
-          children: [
-            Text( goods.type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
-            Text(goods.brand + " " + goods.model),
-          ],),
-        subtitle: Text("Цена: " + goods.price + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Wrap(
+            children: [
+              Text(goods.type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
+              Text(goods.brand + " " + goods.model),
+            ],
+        ),
+        subtitle: Text("Цена: " + goods.price + " ",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         leading: Image(
           height: 50,
           width: 50,
@@ -26,7 +31,8 @@ class GoodsCard extends StatelessWidget {
         ),
         trailing: Icon(Icons.arrow_forward_ios),
         onTap: () => {
-        Navigator.push( context, MaterialPageRoute(builder: (context) => GoodsPage(goods: goods)) )
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => GoodsPage(goods: goods)))
         },
       ),
     );
