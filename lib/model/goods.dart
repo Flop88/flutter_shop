@@ -1,3 +1,4 @@
+
 class Goods {
   String brand;
   String model;
