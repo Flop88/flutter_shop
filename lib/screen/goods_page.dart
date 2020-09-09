@@ -8,6 +8,9 @@ class goods_page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<Goods> _cartList = List<Goods>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,7 +34,7 @@ class goods_page extends StatelessWidget {
             Text( goods.price, style: TextStyle(fontSize: 30),),
             SizedBox(height: 20,),
             InkWell(
-              onTap: () => addToCard(),
+              onTap: () => addToCard(_cartList, goods),
               child: Container(
                 height: 60,
                 color: Colors.lightBlue,
@@ -51,6 +54,9 @@ class goods_page extends StatelessWidget {
   }
 }
 
-addToCard() {
-  print("add to basket");
+addToCard(List<Goods> _cartList, item) {
+  if (!_cartList.contains(item))
+    _cartList.add(item);
+  else
+    _cartList.remove(item);
 }

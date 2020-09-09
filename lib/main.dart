@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/screen/goods_page.dart';
 import 'package:flutter_shop/screen/goods_screen.dart';
-import 'package:flutter_shop/screen/shopping_basket.dart';
+
+import 'components/goods_card.dart';
 
 void main() => runApp(FlutterShop());
 
@@ -32,5 +32,5 @@ class FlutterShop extends StatelessWidget {
 }
 
 openCart(context) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingBasket()), );
+  Navigator.push(context, MaterialPageRoute(builder: (context) => GoodsCard()), );
 }

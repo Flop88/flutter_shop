@@ -20,6 +20,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
         return new ListView.builder(
           physics: BouncingScrollPhysics(),
           itemCount: goods.length,
+
           itemBuilder: (context, index) {
             return GoodsCard(goods: goods[index]);
           },

@@ -10,6 +10,7 @@ String goodsToJson(List<Goods> data) => json.encode(List<dynamic>.from(data.map(
 
 class Goods {
   Goods({
+    this.id,
     this.brand,
     this.model,
     this.type,
@@ -18,6 +19,7 @@ class Goods {
     this.description,
   });
 
+  int id;
   String brand;
   String model;
   String type;
@@ -25,7 +27,12 @@ class Goods {
   String price;
   String description;
 
+//   // To make the sample app look nicer, each item is given one of the
+//   // Material Design primary colors.
+
+
   factory Goods.fromJson(Map<String, dynamic> json) => Goods(
+    id: json["id"],
     brand: json["brand"],
     model: json["model"],
     type: json["type"],
@@ -35,6 +42,7 @@ class Goods {
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "brand": brand,
     "model": model,
     "type": type,
