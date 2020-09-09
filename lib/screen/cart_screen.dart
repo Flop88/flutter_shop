@@ -17,8 +17,8 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
 
-    initState();
-    print("Sum: ${widget.sum}");
+    // initState();
+    // print("Sum: ${widget.sum}");
     return Scaffold(
       appBar: AppBar(
         title: Text("Корзина"),
@@ -64,12 +64,12 @@ class _CartState extends State<Cart> {
     );
   }
 
-  @override
-  void initState() {
-    for(int i = 0; i < widget.cart.length; i++) {
-      print(int.parse(widget.cart[i].price));
-      widget.sum = widget.sum + int.parse(widget.cart[i].price);
-      print("Widget.sum: ${widget.sum}");
-    }
-  }
+  // @override
+  // void initState() {
+  //   for(int i = 0; i < widget.cart.length; i++) {
+  //     print(int.parse(widget.cart[i].price));
+  //     widget.sum = widget.sum + int.parse(widget.cart[i].price);
+  //     print("Widget.sum: ${widget.sum}");
+  //   }
+  // }
 }
