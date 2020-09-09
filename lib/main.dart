@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/screen/goods_screen.dart';
 
-import 'components/goods_card.dart';
 
 void main() => runApp(FlutterShop());
 
@@ -14,23 +13,7 @@ class FlutterShop extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.lightBlueAccent,
           textTheme: TextTheme(title: TextStyle(color: Colors.white))),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Интернет магазин"),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () => openCart(context),
-            )
-          ],
-          centerTitle: true,
-        ),
-        body: GoodsScreen(),
-      ),
+      home: GoodsScreen(),
     );
   }
-}
-
-openCart(context) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => GoodsCard()), );
 }

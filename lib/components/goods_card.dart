@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 import 'package:flutter_shop/screen/goods_page.dart';
 
-class GoodsCard extends StatelessWidget {
-  const GoodsCard({
-    Key key,
-    @required this.goods,
-  }) : super(key: key);
+// class GoodsCard extends StatefulWidget {
+//   const GoodsCard({ Key key,
+//     @required this.goods,
+//   }) : super(key: key);
+//   GoodsCard()
+//
+//   final Goods goods;
+//
+//   @override
+//   _GoodsCardState createState() => _GoodsCardState();
+// }
 
+class GoodsCard extends StatelessWidget {
+  GoodsCard({ Key key,@required this.goods, this.valueSetter, this.cart}) : super(key: key);
   final Goods goods;
+  final ValueSetter valueSetter;
+  final cart;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,9 @@ class GoodsCard extends StatelessWidget {
           width: 50,
           image: NetworkImage(goods.img),
         ),
-        trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => null,),
+        trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => {
+          valueSetter(goods)
+        },),
         onTap: () => {
           Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: goods)))
         },
