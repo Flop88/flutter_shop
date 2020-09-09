@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 
 class goods_page extends StatelessWidget {
-  const goods_page({ Key key,@required this.goods, }) : super(key: key);
+  const goods_page({ Key key,@required this.goods, this.valueSetter}) : super(key: key);
 
   final Goods goods;
+  final ValueSetter valueSetter;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,9 @@ class goods_page extends StatelessWidget {
             Text( goods.price, style: TextStyle(fontSize: 30),),
             SizedBox(height: 20,),
             InkWell(
-              onTap: () => addToCard(_cartList, goods),
+              onTap: () {
+                valueSetter(goods);
+              },
               child: Container(
                 height: 60,
                 color: Colors.lightBlue,
@@ -54,9 +57,3 @@ class goods_page extends StatelessWidget {
   }
 }
 
-addToCard(List<Goods> _cartList, item) {
-  if (!_cartList.contains(item))
-    _cartList.add(item);
-  else
-    _cartList.remove(item);
-}

@@ -14,11 +14,18 @@ import 'package:flutter_shop/screen/goods_page.dart';
 //   _GoodsCardState createState() => _GoodsCardState();
 // }
 
-class GoodsCard extends StatelessWidget {
+class GoodsCard extends StatefulWidget {
   GoodsCard({ Key key,@required this.goods, this.valueSetter, this.cart}) : super(key: key);
   final Goods goods;
   final ValueSetter valueSetter;
-  final cart;
+  List<Goods> cart;
+
+  @override
+  _GoodsCardState createState() => _GoodsCardState();
+}
+
+class _GoodsCardState extends State<GoodsCard> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +36,27 @@ class GoodsCard extends StatelessWidget {
       child: ListTile(
         title: Wrap(
           children: [
-            Text(goods.type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
-            Text(goods.brand.toString() + " " + goods.model),
+            Text(widget.goods.type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
+            Text(widget.goods.brand.toString() + " " + widget.goods.model),
           ],
         ),
-        subtitle: Text("Цена: " + goods.price + " ",
+        subtitle: Text("Цена: " + widget.goods.price + " ",
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         leading: Image(
           height: 50,
           width: 50,
-          image: NetworkImage(goods.img),
+          image: NetworkImage(widget.goods.img),
         ),
         trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => {
-          valueSetter(goods)
+          widget.valueSetter(widget.goods)
         },),
         onTap: () => {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: goods)))
+          Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: widget.goods, valueSetter: (selectedProduct) {
+            setState(() {
+              widget.cart.add(widget.goods);
+            });
+          },)
+          ))
         },
       ),
     );

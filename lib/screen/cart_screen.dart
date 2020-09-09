@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/components/goods_card.dart';
 import 'package:flutter_shop/model/goods.dart';
 
 class Cart extends StatelessWidget {
 
   final List<Goods> cart;
-  int sum;
+  final sum;
 
   Cart({this.cart, this.sum});
 
 
   @override
   Widget build(BuildContext context) {
-    print("Goods in cart: ${cart.length}");
-    print("Sum goods: $sum");
-    print("First Goods: ${cart[0].model}");
     return Scaffold(
       appBar: AppBar(
         title: Text("Корзина"),
@@ -48,14 +44,11 @@ class Cart extends StatelessWidget {
                   ),
                   trailing: IconButton(icon: Icon(Icons.remove_shopping_cart), onPressed: () {
                     cart.remove(cart[index]);
-                    sum = sum - int.parse(cart[index].price);
                   },),
                 ),
               );
             }
           ),
-          Divider(),
-          Text("Итого: - $sum", style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold)),
         ],
       )
     );

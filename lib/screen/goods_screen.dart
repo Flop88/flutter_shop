@@ -47,11 +47,6 @@ class _GoodsScreenState extends State<GoodsScreen> {
                 setState(() {
                   cart.add(goods[index]);
                   print("Добавили товар - ${goods[index].model}");
-                  sum = 0;
-                  cart.forEach((element) {
-                    sum = sum + int.parse(element.price);
-                    print("Sum: $sum");
-                  });
                   print(cart.length);
                   //update
                 });
