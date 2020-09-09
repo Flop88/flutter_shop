@@ -10,8 +10,6 @@ class goods_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<Goods> _cartList = List<Goods>();
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

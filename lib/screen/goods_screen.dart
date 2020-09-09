@@ -6,7 +6,6 @@ import 'package:flutter_shop/screen/cart_screen.dart';
 
 class GoodsScreen extends StatefulWidget {
 
-
   @override
   _GoodsScreenState createState() => _GoodsScreenState();
 }
@@ -15,7 +14,6 @@ class _GoodsScreenState extends State<GoodsScreen> {
 
   List<Goods> cart = [];
   int sum = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
             icon: Icon(Icons.shopping_cart),
 
             onPressed: () => {
-              cart.length != 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart, sum: sum))) : null
+              cart.length != 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart, sum: sum))) : null // Потом можно добавить toast или еще что
             },
           )
         ],
@@ -46,9 +44,6 @@ class _GoodsScreenState extends State<GoodsScreen> {
               return GoodsCard(goods: goods[index], valueSetter: (selectedProduct) {
                 setState(() {
                   cart.add(goods[index]);
-                  print("Добавили товар - ${goods[index].model}");
-                  print(cart.length);
-                  //update
                 });
               }, cart: cart,);
             },

@@ -23,7 +23,7 @@ class Cart extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             itemCount: cart.length,
             itemBuilder: (context, index) {
-              return cart.length == 0 ? Text("123") : Card(
+              return cart.length == 0 ? Text("123") /* Что-то хотел сюда запихнуть, но забыл что. Как вспомню - доделаю */ : Card(
                 elevation: 2.0,
                 margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: ListTile(

@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 import 'package:flutter_shop/screen/goods_page.dart';
 
-// class GoodsCard extends StatefulWidget {
-//   const GoodsCard({ Key key,
-//     @required this.goods,
-//   }) : super(key: key);
-//   GoodsCard()
-//
-//   final Goods goods;
-//
-//   @override
-//   _GoodsCardState createState() => _GoodsCardState();
-// }
 
 class GoodsCard extends StatefulWidget {
   GoodsCard({ Key key,@required this.goods, this.valueSetter, this.cart}) : super(key: key);
