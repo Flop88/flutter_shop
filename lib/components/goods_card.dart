@@ -16,8 +16,10 @@ class GoodsCard extends StatefulWidget {
 class _GoodsCardState extends State<GoodsCard> {
 
 
+
   @override
   Widget build(BuildContext context) {
+
     return Card(
       elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),

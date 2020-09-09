@@ -13,7 +13,6 @@ class GoodsScreen extends StatefulWidget {
 class _GoodsScreenState extends State<GoodsScreen> {
 
   List<Goods> cart = [];
-  int sum = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
             icon: Icon(Icons.shopping_cart),
 
             onPressed: () => {
-              cart.length != 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart, sum: sum))) : null // Потом можно добавить toast или еще что
+              cart.length != 0 ? Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart))) : null // Потом можно добавить toast или еще что
             },
           )
         ],

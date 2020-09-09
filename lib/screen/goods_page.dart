@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 
+import 'cart_screen.dart';
+
 class goods_page extends StatelessWidget {
-  const goods_page({ Key key,@required this.goods, this.valueSetter}) : super(key: key);
+  goods_page({ Key key,@required this.goods, this.valueSetter, this.cart}) : super(key: key);
 
   final Goods goods;
   final ValueSetter valueSetter;
+  List<Goods> cart;
 
   @override
   Widget build(BuildContext context) {
