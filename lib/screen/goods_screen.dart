@@ -14,7 +14,8 @@ class GoodsScreen extends StatefulWidget {
 class _GoodsScreenState extends State<GoodsScreen> {
   Future<List<Goods>> _getGoods() async {
     var data = await http.get("http://mvlikhachev.ru/flutter_shop/goods.json");
-    var jsonData = json.decode(data.body);
+    String body = utf8.decode(data.bodyBytes); // decode to UTF-8
+    var jsonData = json.decode(body);
 
     List<Goods> goods = [];
     for (var g in jsonData) {
@@ -57,6 +58,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
         child: FutureBuilder(
           future: _getGoods(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+            // Если snapshot.data  равно null - выводим сообщение о загрузке чтоб не было красного экрана
             if (snapshot.data == null) {
               return Container(
                 child: Center(
