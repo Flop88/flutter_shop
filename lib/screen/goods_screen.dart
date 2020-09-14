@@ -47,7 +47,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
             onPressed: () => {
               cart.length != 0
                   ? Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Cart(cart: cart)))
+                  MaterialPageRoute(builder: (context) => Cart(cart: cart)))
                   : null // Потом можно добавить toast или еще что
             },
           )

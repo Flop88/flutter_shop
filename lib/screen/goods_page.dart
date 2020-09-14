@@ -29,9 +29,9 @@ class goods_page extends StatelessWidget {
         ),
         Center(
             child: Text(
-          goods.model,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        )),
+              goods.model,
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            )),
         SizedBox(
           height: 20,
         ),
