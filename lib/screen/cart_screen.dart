@@ -17,6 +17,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
 
+    int sum = 0;
     // initState();
     // print("Sum: ${widget.sum}");
     return Scaffold(
@@ -31,35 +32,37 @@ class _CartState extends State<Cart> {
                 physics: BouncingScrollPhysics(),
                 itemCount: widget.cart.length,
                 itemBuilder: (context, index) {
+                  sum = sum + int.parse(widget.cart[index].price);
                   return widget.cart.length == 0 ? Text("123") /* Что-то хотел сюда запихнуть, но забыл что. Как вспомню - доделаю */ : Card(
-                    elevation: 2.0,
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    child: ListTile(
-                      title: Wrap(
-                        children: [
-                          Text(widget.cart[index].type + " ", style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),),
-                          Text(widget.cart[index].brand.toString() + " " + widget.cart[index].model),
-                        ],
-                      ),
-                      subtitle: Text("Цена: " + widget.cart[index].price + " ",
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold)),
-                      leading: Image(
-                        height: 50,
-                        width: 50,
-                        image: NetworkImage(widget.cart[index].img),
-                      ),
-                      trailing: IconButton(icon: Icon(Icons.remove_shopping_cart), onPressed: () {
-                        widget.cart.remove(widget.cart[index]);
-
-                      },),
-                    ),
-                  );
+                   elevation: 2.0,
+                   margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                   child: ListTile(
+                     title: Wrap(
+                       children: [
+                         Text(widget.cart[index].type + " ", style: TextStyle(
+                             color: Colors.black, fontWeight: FontWeight.bold),),
+                         Text(widget.cart[index].brand.toString() + " " + widget.cart[index].model),
+                       ],
+                     ),
+                     subtitle: Text("Цена: " + widget.cart[index].price + " ",
+                         style: TextStyle(
+                             color: Colors.black, fontWeight: FontWeight.bold)),
+                     leading: Image(
+                       height: 50,
+                       width: 50,
+                       image: NetworkImage(widget.cart[index].img),
+                     ),
+                     trailing: IconButton(icon: Icon(Icons.remove_shopping_cart), onPressed: () {
+                       setState(() {
+                         widget.cart.remove(widget.cart[index]);
+                       });
+                     },),
+                   ),
+                    );
                 }
             ),
             Divider(),
-            Text("Итого: ${widget.sum}", style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),)
+            Text("Итого: $sum", style: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),)
           ],
         )
     );
