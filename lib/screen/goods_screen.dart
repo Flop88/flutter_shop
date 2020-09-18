@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shop/components/goods_card.dart';
 import 'package:flutter_shop/model/goods.dart';
 import 'package:flutter_shop/screen/cart_screen.dart';
+import 'package:flutter_shop/screen/goods_page.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -45,10 +45,11 @@ class _GoodsScreenState extends State<GoodsScreen> {
           IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () => {
-              cart.length != 0
-                  ? Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Cart(cart: cart)))
-                  : null // Потом можно добавить toast или еще что
+
+              cart.forEach((element) => print("In cart: " + element.toString())),
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Cart(cart: cart))),
+
             },
           )
         ],
@@ -69,14 +70,38 @@ class _GoodsScreenState extends State<GoodsScreen> {
               return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GoodsCard(
-                    goods: snapshot.data[index],
-                    valueSetter: (selectedProduct) {
-                      setState(() {
-                        cart.add(snapshot.data[index]);
-                      });
-                    },
-                    cart: cart,
+                  return Card(
+                    elevation: 2.0,
+                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    // child: Text(goods.price),
+                    child: ListTile(
+                      title: Wrap(
+                        children: [
+                          Text(snapshot.data[index].type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
+                          Text(snapshot.data[index].brand.toString() + " " + snapshot.data[index].model),
+                        ],
+                      ),
+                      subtitle: Text("Цена: " + snapshot.data[index].price + " ",
+                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                      leading: Image(
+                        height: 50,
+                        width: 50,
+                        image: NetworkImage(snapshot.data[index].img),
+                      ),
+                      trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => {
+                        // Нажатие на кнопку добавления товара в корзину
+                        cart.add(snapshot.data[index]),
+                        print("Добавили: " +snapshot.data[index].model)
+                      },),
+                      onTap: () => {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: snapshot.data[index], valueSetter: (selectedProduct) {
+                          setState(() {
+
+                          });
+                        },)
+                        ))
+                      },
+                    ),
                   );
                 },
               );
