@@ -3,12 +3,11 @@ import 'package:flutter_shop/model/goods.dart';
 
 
 class goods_page extends StatelessWidget {
-  goods_page({Key key, @required this.goods, this.valueSetter, this.cart})
+  goods_page({Key key, @required this.goods, this.valueSetter})
       : super(key: key);
 
   final Goods goods;
   final ValueSetter valueSetter;
-  List<Goods> cart = [];
 
   @override
   Widget build(BuildContext context) {

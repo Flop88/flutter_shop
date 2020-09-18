@@ -12,6 +12,9 @@ class GoodsScreen extends StatefulWidget {
 }
 
 class _GoodsScreenState extends State<GoodsScreen> {
+
+  static List<Goods> cart = [];
+
   Future<List<Goods>> _getGoods() async {
     var data = await http.get("http://mvlikhachev.ru/flutter_shop/goods.json");
     String body = utf8.decode(data.bodyBytes); // decode to UTF-8
@@ -33,11 +36,10 @@ class _GoodsScreenState extends State<GoodsScreen> {
     return goods;
   }
 
-  static List<Goods> cart = [];
+
 
   @override
   Widget build(BuildContext context) {
-    print(cart.length);
     return Scaffold(
       appBar: AppBar(
         title: Text("Интернет магазин"),
@@ -92,9 +94,6 @@ class _GoodsScreenState extends State<GoodsScreen> {
                       },),
                       onTap: () => {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: snapshot.data[index], valueSetter: (selectedProduct) {
-                          setState(() {
-
-                          });
                         },)
                         ))
                       },
