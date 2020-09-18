@@ -33,7 +33,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
     return goods;
   }
 
-  List<Goods> cart = [];
+  static List<Goods> cart = [];
 
   @override
   Widget build(BuildContext context) {

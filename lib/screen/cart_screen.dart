@@ -3,31 +3,30 @@ import 'package:flutter_shop/model/goods.dart';
 
 class Cart extends StatefulWidget {
   final List<Goods> cart;
-  static int sum = 0;
+
+  int sum = 0;
+  int count = 1;
+  int cartSum = 0;
 
   Cart({this.cart});
-
 
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
-  int cartSum = 0;
-  // get sum => cartSum;
 
+
+  // get sum => cartSum;
 
   @override
   Widget build(BuildContext context) {
     setState(() {
-      // widget.cart.forEach((element) {
-      //   print("length: ${cartSum + int.parse(element.price)}");
-      // });
-
-      // for(final i in widget.cart) {
-      //   print("length: ${cartSum + int.parse(i.price)}");
-      //   print("Sum: ${cartSum + int.parse(i.price)}");
-      // }
+      widget.sum = 0;
+      widget.cart.forEach((element) {
+      widget.sum = widget.sum + int.parse(element.price);
+      print(widget.sum);
+    });
     });
     return Scaffold(
         appBar: AppBar(
@@ -42,11 +41,7 @@ class _CartState extends State<Cart> {
                   physics: BouncingScrollPhysics(),
                   itemCount: widget.cart.length,
                   itemBuilder: (context, index) {
-                      cartSum += int.parse(widget.cart[index].price);
-                    return widget.cart.length == 0
-                        ? Text(
-                            "123") /* Что-то хотел сюда запихнуть, но забыл что. Как вспомню - доделаю */
-                        : Card(
+                    return Card(
                             elevation: 2.0,
                             margin: EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 8),
@@ -69,16 +64,22 @@ class _CartState extends State<Cart> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold)),
-                              leading: Image(
-                                height: 50,
-                                width: 50,
-                                image: NetworkImage(widget.cart[index].img),
-                              ),
+                              leading: Wrap(children: [
+                                Container(
+                                    child: Text( "${widget.count} x", style: TextStyle(fontWeight: FontWeight.bold), ),
+                                  margin: EdgeInsets.only(top: 15),
+                                ),
+                                Image(
+                                  height: 50,
+                                  width: 50,
+                                  image: NetworkImage(widget.cart[index].img),
+                                ),
+                              ]),
                               trailing: IconButton(
                                 icon: Icon(Icons.remove_shopping_cart),
                                 onPressed: () {
                                   setState(() {
-                                    // cartSum -= int.parse(widget.cart[index].price);
+                                    widget.sum -= int.parse(widget.cart[index].price);
                                     widget.cart.remove(widget.cart[index]);
                                   });
                                 },
@@ -88,17 +89,15 @@ class _CartState extends State<Cart> {
                   }),
               Divider(),
               Text(
-                "Итого: $cartSum",
+                "Итого: ${widget.sum}",
                 style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,),
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               )
             ],
           ),
         ]));
   }
-
-  
 }
-
