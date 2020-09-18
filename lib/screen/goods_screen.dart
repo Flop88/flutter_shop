@@ -45,11 +45,8 @@ class _GoodsScreenState extends State<GoodsScreen> {
           IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () => {
-
-              cart.forEach((element) => print("In cart: " + element.toString())),
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Cart(cart: cart))),
-
             },
           )
         ],
