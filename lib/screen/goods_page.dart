@@ -23,12 +23,12 @@ class goods_page extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: size.height ,
+            height: size.height * 2.4 ,
             child: Stack(
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: size.height * 0.32),
-                  height: 500,
+                  height: size.height * 2.4,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
