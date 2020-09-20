@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/components/buy_button.dart';
+import 'package:flutter_shop/components/product_description.dart';
+import 'package:flutter_shop/components/product_price_and_img.dart';
 import 'package:flutter_shop/model/goods.dart';
 
 import 'cart_screen.dart';
-
 
 class goods_page extends StatelessWidget {
   goods_page({Key key, @required this.goods, this.valueSetter})
@@ -14,189 +16,70 @@ class goods_page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
     Color colorProduct = Color.fromRGBO(55, 118, 166, 1);
 
-
     return Scaffold(
-          backgroundColor: colorProduct,
-          appBar: AppBar(
-            title: Text(goods.model),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.shopping_cart),
-                onPressed: () => {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart))),
-                },
-              )
-            ],
-            centerTitle: true,
-          ),
-          body:  SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            // height: size.height * 2.4 ,
-            child: Stack(
+        backgroundColor: colorProduct,
+        appBar: AppBar(
+          title: Text(goods.model),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () => {
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart))),
+              },
+            )
+          ],
+          centerTitle: true, ),
+        body: ListView(
+          children:[
+            Column(
               children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: size.height * 0.32),
-                  height: size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        topRight: Radius.circular(24),
-                    )
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(goods.type, style: TextStyle(color: Colors.white),),
-                        Text(goods.model, style: Theme.of(context).textTheme.headline4.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold
-                        ),),
-                        Row(
-                          children: <Widget>[
-                            RichText(
-                                text: TextSpan(
-                                    children:[
-                                      TextSpan(text: "Цена: \n"),
-                                      TextSpan(text: "${goods.price} ₽",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline4
-                                              .copyWith(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold)
-                                      ),
-                                    ]
-                                )
-                            ),
-                            Expanded(child: Image(image: NetworkImage(goods.img), height: 250,)),
+                SizedBox(
+                  // height: size.height * 2.4 ,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: size.height * 0.33),
+                        // height: size.height,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
+                            )),
+                        child: Column(
+                          children: [
+                            product_description(goods: goods),
+                            buy_button(colorProduct: colorProduct),
                           ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 30),
-                          child: Text(goods.description, style: TextStyle(
-                              height: 1.5
-                          ),),
-                        ),
-                        Center(
-                          child: SizedBox(
-                            height: 50,
-                            child: FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18)),
-                              color: colorProduct,
-                              onPressed: () {},
-                              child: Text(
-                                "Купить".toUpperCase(),
-                                style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white
-                                )
-                                ,
-                              ),
-                            ),
-                          ),
                         )
-                      ],
-                    ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 20),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text( goods.type, style: TextStyle(color: Colors.white),),
+                              Text(goods.model, style: Theme.of(context)
+                                  .textTheme
+                                  .headline4
+                                  .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                              product_price_and_img(goods: goods),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 )
               ],
             ),
-          )
-        ],
-      ),
-    )
-    );
-    // return Scaffold(
-    //   backgroundColor: Colors.white,
-    //   appBar: AppBar(
-    //     title: Text(goods.model),
-    //     centerTitle: true,
-    //   ),
-    //   body: Container(
-    //     margin: EdgeInsets.all(10),
-    //     child: ListView(children: [
-    //       Container(
-    //         alignment: Alignment.center,
-    //         padding: EdgeInsets.symmetric(vertical: 10.0),
-    //         height: 200,
-    //         child: Image(
-    //           image: NetworkImage(goods.img),
-    //         ),
-    //       ),
-    //       Center(
-    //           child: Text(
-    //             goods.model,
-    //             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    //           )),
-    //       SizedBox(
-    //         height: 20,
-    //       ),
-    //       Text(
-    //         "Описание: ",
-    //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-    //       ),
-    //       Text(
-    //         goods.description,
-    //         style: TextStyle(fontSize: 20),
-    //       ),
-    //       SizedBox(
-    //         height: 20,
-    //       ),
-    //       Text(
-    //         "Цена: ",
-    //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-    //       ),
-    //       Text(
-    //         goods.price,
-    //         style: TextStyle(fontSize: 30),
-    //       ),
-    //       SizedBox(
-    //         height: 20,
-    //       ),
-    //       InkWell(
-    //         onTap: () {
-    //           valueSetter(goods);
-    //         },
-    //         child: Container(
-    //           height: 60,
-    //           color: Colors.lightBlue,
-    //           child: Row(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               Icon(
-    //                 Icons.add_shopping_cart,
-    //                 size: 50,
-    //                 color: Colors.white,
-    //               ),
-    //               SizedBox(
-    //                 width: 10,
-    //               ),
-    //               Text(
-    //                 "Купить",
-    //                 style: TextStyle(
-    //                     color: Colors.white,
-    //                     fontSize: 24,
-    //                     fontWeight: FontWeight.bold),
-    //               )
-    //             ],
-    //           ),
-    //         ),
-    //       )
-    //     ]),
-    //   ),
-    // );
+          ]
+        ));
   }
 }
