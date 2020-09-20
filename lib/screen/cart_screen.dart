@@ -5,6 +5,7 @@ import 'package:flutter_shop/model/goods.dart';
 
 class Cart extends StatefulWidget {
   final List<Goods> cart;
+  // Goods goods;
 
   int sum = 0;
   int count = 1;
@@ -18,26 +19,19 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
 
-
-  // get sum => cartSum;
-
   @override
   Widget build(BuildContext context) {
     var map = Map();
     var list = List();
 
     final goodsCounts = map.values.toList();
-    // List<Goods> cloneCart = []..addAll(widget.cart);
     List<Goods> result = LinkedHashSet<Goods>.from(widget.cart).toList();
-    // print(result[0].model); // => ["a", "b", "c", "d"]
 
     setState(() {
       widget.sum = 0;
 
       widget.cart.forEach((element) {
         widget.sum = widget.sum + int.parse(element.price);
-        // print(element.model);
-        // print(widget.sum);
 
         if(!map.containsKey(element)) {
           map[element] = 1;
@@ -111,57 +105,6 @@ class _CartState extends State<Cart> {
                       ),
                     );
                   }),
-              // ListView.builder(
-              //     shrinkWrap: true,
-              //     physics: BouncingScrollPhysics(),
-              //     itemCount: widget.cart.length,
-              //     itemBuilder: (context, index) {
-              //       return Card(
-              //               elevation: 2.0,
-              //               margin: EdgeInsets.symmetric(
-              //                   horizontal: 8, vertical: 8),
-              //               child: ListTile(
-              //                 title: Wrap(
-              //                   children: [
-              //                     Text(
-              //                       widget.cart[index].type + " ",
-              //                       style: TextStyle(
-              //                           color: Colors.black,
-              //                           fontWeight: FontWeight.bold),
-              //                     ),
-              //                     Text(widget.cart[index].brand.toString() +
-              //                         " " +
-              //                         widget.cart[index].model),
-              //                   ],
-              //                 ),
-              //                 subtitle: Text(
-              //                     "Цена: " + widget.cart[index].price + " ",
-              //                     style: TextStyle(
-              //                         color: Colors.black,
-              //                         fontWeight: FontWeight.bold)),
-              //                 leading: Wrap(children: [
-              //                   Container(
-              //                       child: Text( "${widget.count} x", style: TextStyle(fontWeight: FontWeight.bold), ),
-              //                     margin: EdgeInsets.only(top: 15),
-              //                   ),
-              //                   Image(
-              //                     height: 50,
-              //                     width: 50,
-              //                     image: NetworkImage(widget.cart[index].img),
-              //                   ),
-              //                 ]),
-              //                 trailing: IconButton(
-              //                   icon: Icon(Icons.remove_shopping_cart),
-              //                   onPressed: () {
-              //                     setState(() {
-              //                       widget.sum -= int.parse(widget.cart[index].price);
-              //                       widget.cart.remove(widget.cart[index]);
-              //                     });
-              //                   },
-              //                 ),
-              //               ),
-              //             );
-              //     }),
               Divider(),
               Text(
                 "Итого: ${widget.sum}",

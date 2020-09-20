@@ -1,110 +1,202 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
-import 'package:flutter_shop/screen/cart_screen.dart';
-import 'package:flutter_shop/screen/goods_page.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
-class GoodsScreen extends StatefulWidget {
-  @override
-  _GoodsScreenState createState() => _GoodsScreenState();
-}
-
-class _GoodsScreenState extends State<GoodsScreen> {
-
-  static List<Goods> cart = [];
-
-  Future<List<Goods>> _getGoods() async {
-    var data = await http.get("http://mvlikhachev.ru/flutter_shop/goods.json");
-    String body = utf8.decode(data.bodyBytes); // decode to UTF-8
-    var jsonData = json.decode(body);
-
-    List<Goods> goods = [];
-    for (var g in jsonData) {
-      Goods jsonGoods = Goods(
-          id: g["id"],
-          brand: g["brand"],
-          model: g["model"],
-          type: g["type"],
-          img: g["img"],
-          price: g["price"],
-          description: g["description"]);
-      goods.add(jsonGoods);
-    }
-
-    return goods;
-  }
+import 'cart_screen.dart';
 
 
+class goods_page extends StatelessWidget {
+  goods_page({Key key, @required this.goods, this.valueSetter})
+      : super(key: key);
+
+  final Goods goods;
+  final ValueSetter valueSetter;
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+    Color colorProduct = Color.fromRGBO(55, 118, 166, 1);
+
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Интернет магазин"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Cart(cart: cart))),
-            },
+          backgroundColor: colorProduct,
+          appBar: AppBar(
+            title: Text(goods.model),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () => {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart))),
+                },
+              )
+            ],
+            centerTitle: true,
+          ),
+          body:  SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            // height: size.height * 2.4 ,
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: size.height * 0.32),
+                  height: size.height,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
+                    )
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(goods.type, style: TextStyle(color: Colors.white),),
+                        Text(goods.model, style: Theme.of(context).textTheme.headline4.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold
+                        ),),
+                        Row(
+                          children: <Widget>[
+                            RichText(
+                                text: TextSpan(
+                                    children:[
+                                      TextSpan(text: "Цена: \n"),
+                                      TextSpan(text: "${goods.price} ₽",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4
+                                              .copyWith(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold)
+                                      ),
+                                    ]
+                                )
+                            ),
+                            Expanded(child: Image(image: NetworkImage(goods.img), height: 250,)),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 30),
+                          child: Text(goods.description, style: TextStyle(
+                              height: 1.5
+                          ),),
+                        ),
+                        Center(
+                          child: SizedBox(
+                            height: 50,
+                            child: FlatButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18)),
+                              color: colorProduct,
+                              onPressed: () {},
+                              child: Text(
+                                "Купить".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white
+                                )
+                                ,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
-        centerTitle: true,
       ),
-      body: Container(
-        child: FutureBuilder(
-          future: _getGoods(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            // Если snapshot.data  равно null - выводим сообщение о загрузке чтоб не было красного экрана
-            if (snapshot.data == null) {
-              return Container(
-                child: Center(
-                  child: Text("Loading..."),
-                ),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    elevation: 2.0,
-                    margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    // child: Text(goods.price),
-                    child: ListTile(
-                      title: Wrap(
-                        children: [
-                          Text(snapshot.data[index].type + " ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), ),
-                          Text(snapshot.data[index].brand.toString() + " " + snapshot.data[index].model),
-                        ],
-                      ),
-                      subtitle: Text("Цена: " + snapshot.data[index].price + " ",
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                      leading: Image(
-                        height: 50,
-                        width: 50,
-                        image: NetworkImage(snapshot.data[index].img),
-                      ),
-                      trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => {
-                        // Нажатие на кнопку добавления товара в корзину
-                        cart.add(snapshot.data[index]),
-                        print("Добавили: " +snapshot.data[index].model)
-                      },),
-                      onTap: () => {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: snapshot.data[index], valueSetter: (selectedProduct) {
-                        },)
-                        ))
-                      },
-                    ),
-                  );
-                },
-              );
-            }
-          },
-        ),
-      ),
+    )
     );
+    // return Scaffold(
+    //   backgroundColor: Colors.white,
+    //   appBar: AppBar(
+    //     title: Text(goods.model),
+    //     centerTitle: true,
+    //   ),
+    //   body: Container(
+    //     margin: EdgeInsets.all(10),
+    //     child: ListView(children: [
+    //       Container(
+    //         alignment: Alignment.center,
+    //         padding: EdgeInsets.symmetric(vertical: 10.0),
+    //         height: 200,
+    //         child: Image(
+    //           image: NetworkImage(goods.img),
+    //         ),
+    //       ),
+    //       Center(
+    //           child: Text(
+    //             goods.model,
+    //             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+    //           )),
+    //       SizedBox(
+    //         height: 20,
+    //       ),
+    //       Text(
+    //         "Описание: ",
+    //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+    //       ),
+    //       Text(
+    //         goods.description,
+    //         style: TextStyle(fontSize: 20),
+    //       ),
+    //       SizedBox(
+    //         height: 20,
+    //       ),
+    //       Text(
+    //         "Цена: ",
+    //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+    //       ),
+    //       Text(
+    //         goods.price,
+    //         style: TextStyle(fontSize: 30),
+    //       ),
+    //       SizedBox(
+    //         height: 20,
+    //       ),
+    //       InkWell(
+    //         onTap: () {
+    //           valueSetter(goods);
+    //         },
+    //         child: Container(
+    //           height: 60,
+    //           color: Colors.lightBlue,
+    //           child: Row(
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             children: [
+    //               Icon(
+    //                 Icons.add_shopping_cart,
+    //                 size: 50,
+    //                 color: Colors.white,
+    //               ),
+    //               SizedBox(
+    //                 width: 10,
+    //               ),
+    //               Text(
+    //                 "Купить",
+    //                 style: TextStyle(
+    //                     color: Colors.white,
+    //                     fontSize: 24,
+    //                     fontWeight: FontWeight.bold),
+    //               )
+    //             ],
+    //           ),
+    //         ),
+    //       )
+    //     ]),
+    //   ),
+    // );
   }
 }
