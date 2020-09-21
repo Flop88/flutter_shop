@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 
 class Cart extends StatefulWidget {
-  final List<Goods> cart;
-  // Goods goods;
+  List<Goods> cart;
+  Goods goods;
 
   int sum = 0;
   int count = 1;
   int cartSum = 0;
 
   Cart({this.cart});
+
+  Cart.product({this.goods});
+  Cart.clear();
 
   @override
   _CartState createState() => _CartState();
@@ -42,9 +45,6 @@ class _CartState extends State<Cart> {
     });
 
       list = map.values.toList();
-      // print("Всего объектов: " + widget.cart.length.toString());
-      // print("Уникальных объектов: " + list.length.toString());
-      // print("В новом списке объектов: " + result.length.toString());
     });
     return Scaffold(
         appBar: AppBar(

@@ -10,11 +10,16 @@ import 'goods_screen.dart';
 class GoodsScreen extends StatefulWidget {
   @override
   _GoodsScreenState createState() => _GoodsScreenState();
+  static List<Goods> cart = [];
+  static String title(){
+    return 'Lorem Ipsum Title';
+  }
+
 }
 
 class _GoodsScreenState extends State<GoodsScreen> {
 
-  static List<Goods> cart = [];
+
 
   Future<List<Goods>> _getGoods() async {
     var data = await http.get("http://mvlikhachev.ru/flutter_shop/goods.json");
@@ -47,7 +52,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
             icon: Icon(Icons.shopping_cart),
             onPressed: () => {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Cart(cart: cart))),
+                  MaterialPageRoute(builder: (context) => Cart(cart: GoodsScreen.cart))),
             },
           )
         ],
@@ -88,7 +93,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
                       ),
                       trailing: IconButton(icon: Icon(Icons.add_shopping_cart), onPressed: () => {
                         // Нажатие на кнопку добавления товара в корзину
-                        cart.add(snapshot.data[index]),
+                        GoodsScreen.cart.add(snapshot.data[index]),
                         print("Добавили: " +snapshot.data[index].model)
                       },),
                       onTap: () => {

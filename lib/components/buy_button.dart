@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/model/goods.dart';
+import 'package:flutter_shop/screen/goods_list_screen.dart';
 
 class BuyButton extends StatelessWidget {
   const BuyButton({
     Key key,
     @required this.colorProduct,
+    @required this.goods,
   }) : super(key: key);
 
   final Color colorProduct;
+  final Goods goods;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,9 @@ class BuyButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18)),
             color: colorProduct,
-            onPressed: () {},
+            onPressed: () {
+              GoodsScreen.cart.add(goods);
+            },
             child: Text(
               "Купить".toUpperCase(),
               style: TextStyle(

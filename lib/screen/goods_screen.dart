@@ -4,6 +4,7 @@ import 'package:flutter_shop/components/buy_button.dart';
 import 'package:flutter_shop/components/product_description.dart';
 import 'package:flutter_shop/components/product_price_and_img.dart';
 import 'package:flutter_shop/model/goods.dart';
+import 'package:flutter_shop/screen/goods_list_screen.dart';
 
 import 'cart_screen.dart';
 
@@ -27,7 +28,8 @@ class GoodsPage extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.shopping_cart),
               onPressed: () => {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => Cart(cart: cart))),
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Cart(cart: GoodsScreen.cart))),
               },
             )
           ],
@@ -52,7 +54,7 @@ class GoodsPage extends StatelessWidget {
                         child: Column(
                           children: [
                             ProductDescription(goods: goods),
-                            BuyButton(colorProduct: colorProduct),
+                            BuyButton(colorProduct: colorProduct, goods: goods,),
                           ],
                         )
                       ),
