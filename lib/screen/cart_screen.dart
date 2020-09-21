@@ -42,9 +42,9 @@ class _CartState extends State<Cart> {
     });
 
       list = map.values.toList();
-      print("Всего объектов: " + widget.cart.length.toString());
-      print("Уникальных объектов: " + list.length.toString());
-      print("В новом списке объектов: " + result.length.toString());
+      // print("Всего объектов: " + widget.cart.length.toString());
+      // print("Уникальных объектов: " + list.length.toString());
+      // print("В новом списке объектов: " + result.length.toString());
     });
     return Scaffold(
         appBar: AppBar(
@@ -97,8 +97,8 @@ class _CartState extends State<Cart> {
                           icon: Icon(Icons.remove_shopping_cart),
                           onPressed: () {
                             setState(() {
-                              widget.sum -= int.parse(widget.cart[index].price);
-                              widget.cart.remove(widget.cart[index]);
+                              widget.sum -= int.parse(result[index].price);
+                              widget.cart.remove(result[index]);
                             });
                           },
                         ),
