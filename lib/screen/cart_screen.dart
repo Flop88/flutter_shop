@@ -63,45 +63,73 @@ class _CartState extends State<Cart> {
                       elevation: 2.0,
                       margin: EdgeInsets.symmetric(
                           horizontal: 8, vertical: 8),
-                      child: ListTile(
-                        title: Wrap(
-                          children: [
-                            Text(
-                             result[index].type + " ",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                      child: Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: Wrap(
+                              children: [
+                                Text(
+                                  result[index].type + " ",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(result[index].brand.toString() +
+                                    " " +
+                                    result[index].model),
+                              ],
                             ),
-                            Text(result[index].brand.toString() +
-                                " " +
-                                result[index].model),
-                          ],
-                        ),
-                        subtitle: Text(
-                            "Цена: " + result[index].price + " ",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        leading: Wrap(children: [
-                          Container(
-                            child: Text( "${list[index]} x", style: TextStyle(fontWeight: FontWeight.bold), ),
-                            margin: EdgeInsets.only(top: 15),
+                            subtitle: Wrap(
+                                children:[
+                                  Text(
+                                      "Цена: " + result[index].price + " ",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold)),
+                                ]
+                            ),
+                            leading: Wrap(children: [
+                              Image(
+                                height: 50,
+                                width: 50,
+                                image: NetworkImage(result[index].img),
+                              ),
+                            ]),
+                            trailing: IconButton(
+                              icon: Icon(Icons.remove_shopping_cart),
+                              onPressed: () {
+                                setState(() {
+                                  widget.sum -= int.parse(result[index].price);
+                                  widget.cart.remove(result[index]);
+                                });
+                              },
+                            ),
                           ),
-                          Image(
-                            height: 50,
-                            width: 50,
-                            image: NetworkImage(result[index].img),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              FlatButton(
+                                child: Text("+"),
+                                onPressed: () {
+                                  setState(() {
+                                    widget.sum += int.parse(result[index].price);
+                                    widget.cart.add(result[index]);
+                                  });
+                                },
+                              ),
+                              Text( "${list[index]}", style: TextStyle(fontWeight: FontWeight.bold)),
+                              FlatButton(
+                                child: Text('-'),
+                                onPressed: () {
+                                  setState(() {
+                                    widget.sum -= int.parse(result[index].price);
+                                    widget.cart.remove(result[index]);
+                                  });
+                                },
+                              ),
+                            ],
                           ),
-                        ]),
-                        trailing: IconButton(
-                          icon: Icon(Icons.remove_shopping_cart),
-                          onPressed: () {
-                            setState(() {
-                              widget.sum -= int.parse(result[index].price);
-                              widget.cart.remove(result[index]);
-                            });
-                          },
-                        ),
+                        ],
                       ),
                     );
                   }),

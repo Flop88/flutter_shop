@@ -3,7 +3,7 @@ import 'package:flutter_shop/model/goods.dart';
 
 class CartItem {
   final Goods product;
-  final int quantity;
+  int quantity;
 
   CartItem(
       {@required this.product,

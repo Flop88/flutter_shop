@@ -37,8 +37,6 @@ class _GoodsScreenState extends State<GoodsScreen> {
     return goods;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
