@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class buy_button extends StatelessWidget {
-  const buy_button({
+class BuyButton extends StatelessWidget {
+  const BuyButton({
     Key key,
     @required this.colorProduct,
   }) : super(key: key);

@@ -94,7 +94,7 @@ class _GoodsScreenState extends State<GoodsScreen> {
                         print("Добавили: " +snapshot.data[index].model)
                       },),
                       onTap: () => {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => goods_page(goods: snapshot.data[index], valueSetter: (selectedProduct) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => GoodsPage (goods: snapshot.data[index], valueSetter: (selectedProduct) {
                         },)
                         ))
                       },

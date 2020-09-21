@@ -7,8 +7,8 @@ import 'package:flutter_shop/model/goods.dart';
 
 import 'cart_screen.dart';
 
-class goods_page extends StatelessWidget {
-  goods_page({Key key, @required this.goods, this.valueSetter})
+class GoodsPage extends StatelessWidget {
+  GoodsPage({Key key, @required this.goods, this.valueSetter})
       : super(key: key);
 
   final Goods goods;
@@ -51,8 +51,8 @@ class goods_page extends StatelessWidget {
                             )),
                         child: Column(
                           children: [
-                            product_description(goods: goods),
-                            buy_button(colorProduct: colorProduct),
+                            ProductDescription(goods: goods),
+                            BuyButton(colorProduct: colorProduct),
                           ],
                         )
                       ),
@@ -69,7 +69,7 @@ class goods_page extends StatelessWidget {
                                   .headline4
                                   .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                               ),
-                              product_price_and_img(goods: goods),
+                              ProductPriceAndImg(goods: goods),
                             ],
                           ),
                         ),

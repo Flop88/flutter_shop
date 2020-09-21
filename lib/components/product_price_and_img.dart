@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 
-class product_price_and_img extends StatelessWidget {
-  const product_price_and_img({
+class ProductPriceAndImg extends StatelessWidget {
+  const ProductPriceAndImg({
     Key key,
     @required this.goods,
   }) : super(key: key);

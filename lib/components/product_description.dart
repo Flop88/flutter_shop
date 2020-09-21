@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/model/goods.dart';
 
-class product_description extends StatelessWidget {
-  const product_description({
+class ProductDescription extends StatelessWidget {
+  const ProductDescription({
     Key key,
     @required this.goods,
   }) : super(key: key);
