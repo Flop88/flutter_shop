@@ -1,15 +1,18 @@
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_shop/model/goods.dart';
 
 class CartItem {
   final Goods product;
-  int quantity;
+  int quantity = 0;
 
   static List<Goods> instance = [];
+  static int sum = 0;
+
 
   CartItem(
       {@required this.product,
-        @required this.quantity
       });
 
   static addProduct(Goods goods) {

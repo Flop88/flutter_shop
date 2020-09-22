@@ -29,13 +29,15 @@ class _CartState extends State<Cart> {
     var list = List();
 
     final goodsCounts = map.values.toList();
+    // List<Goods> cloneCart = []..addAll(widget.cart);
     List<Goods> result = LinkedHashSet<Goods>.from(CartItem.instance).toList();
+    // print(result[0].model); // => ["a", "b", "c", "d"]
 
     setState(() {
-      widget.sum = 0;
+      CartItem.sum = 0;
 
-      result.forEach((element) {
-        widget.sum = widget.sum + int.parse(element.price);
+      CartItem.instance.forEach((element) {
+        CartItem.sum = CartItem.sum + int.parse(element.price);
 
         if(!map.containsKey(element)) {
           map[element] = 1;
@@ -43,9 +45,12 @@ class _CartState extends State<Cart> {
           map[element] +=1;
 
         }
-    });
+      });
 
       list = map.values.toList();
+      print("Всего объектов: " + CartItem.instance.length.toString());
+      print("Уникальных объектов: " + list.length.toString());
+      print("В новом списке объектов: " + result.length.toString());
     });
     return Scaffold(
         appBar: AppBar(
@@ -118,7 +123,7 @@ class _CartState extends State<Cart> {
                                   });
                                 },
                               ),
-                              Text( "${CartItem.}", style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text( "${list[index]}", style: TextStyle(fontWeight: FontWeight.bold)),
                               FlatButton(
                                 child: Text('-'),
                                 onPressed: () {
@@ -136,7 +141,7 @@ class _CartState extends State<Cart> {
                   }),
               Divider(),
               Text(
-                "Итого: ${widget.sum}",
+                "Итого: ${CartItem.sum}",
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.black,
