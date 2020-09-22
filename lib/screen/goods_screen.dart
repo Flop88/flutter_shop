@@ -29,7 +29,7 @@ class GoodsPage extends StatelessWidget {
               icon: Icon(Icons.shopping_cart),
               onPressed: () => {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Cart(cart: GoodsScreen.cart))),
+                    MaterialPageRoute(builder: (context) => Cart())),
               },
             )
           ],
@@ -39,12 +39,10 @@ class GoodsPage extends StatelessWidget {
             Column(
               children: <Widget>[
                 SizedBox(
-                  // height: size.height * 2.4 ,
                   child: Stack(
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.only(top: size.height * 0.33),
-                        // height: size.height,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(

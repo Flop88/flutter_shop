@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/model/cart.dart';
 import 'package:flutter_shop/model/goods.dart';
 
 class Cart extends StatefulWidget {
@@ -11,7 +12,7 @@ class Cart extends StatefulWidget {
   int count = 1;
   int cartSum = 0;
 
-  Cart({this.cart});
+  Cart();
 
   Cart.product({this.goods});
   Cart.clear();
@@ -28,12 +29,12 @@ class _CartState extends State<Cart> {
     var list = List();
 
     final goodsCounts = map.values.toList();
-    List<Goods> result = LinkedHashSet<Goods>.from(widget.cart).toList();
+    List<Goods> result = LinkedHashSet<Goods>.from(CartItem.instance).toList();
 
     setState(() {
       widget.sum = 0;
 
-      widget.cart.forEach((element) {
+      result.forEach((element) {
         widget.sum = widget.sum + int.parse(element.price);
 
         if(!map.containsKey(element)) {
@@ -100,7 +101,7 @@ class _CartState extends State<Cart> {
                               onPressed: () {
                                 setState(() {
                                   widget.sum -= int.parse(result[index].price);
-                                  widget.cart.remove(result[index]);
+                                  CartItem.removeProduct(result[index]);
                                 });
                               },
                             ),
@@ -113,17 +114,17 @@ class _CartState extends State<Cart> {
                                 onPressed: () {
                                   setState(() {
                                     widget.sum += int.parse(result[index].price);
-                                    widget.cart.add(result[index]);
+                                    CartItem.addProduct(result[index]);
                                   });
                                 },
                               ),
-                              Text( "${list[index]}", style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text( "${CartItem.}", style: TextStyle(fontWeight: FontWeight.bold)),
                               FlatButton(
                                 child: Text('-'),
                                 onPressed: () {
                                   setState(() {
                                     widget.sum -= int.parse(result[index].price);
-                                    widget.cart.remove(result[index]);
+                                    CartItem.removeProduct(result[index]);
                                   });
                                 },
                               ),

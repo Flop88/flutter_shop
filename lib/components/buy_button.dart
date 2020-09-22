@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/model/cart.dart';
 import 'package:flutter_shop/model/goods.dart';
 import 'package:flutter_shop/screen/goods_list_screen.dart';
 
@@ -24,7 +25,7 @@ class BuyButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18)),
             color: colorProduct,
             onPressed: () {
-              GoodsScreen.cart.add(goods);
+              CartItem.addProduct(goods);
             },
             child: Text(
               "Купить".toUpperCase(),
